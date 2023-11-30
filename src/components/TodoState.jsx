@@ -1,9 +1,7 @@
 export const TodoState = (props) => {
-  const { todos, completed } = props;
+  const { todosCount, completedCount, notCompletedCount } = props;
 
   return (
-    <span>{`全てのタスク: ${todos} 完了済み: ${completed} 未完了: ${
-      todos - completed
-    }`}</span>
+    <span>{`全てのタスク: ${todosCount} 完了済み: ${completedCount} 未完了: ${notCompletedCount}`}</span>
   );
 };
