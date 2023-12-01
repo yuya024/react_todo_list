@@ -9,7 +9,6 @@ export const useTodoFuction = () => {
   };
   const [text, setText] = useState("");
   const [id, setId] = useState(1);
-  const [newTodo, setNewTodo] = useState(taskObj);
   const [todos, setTodos] = useState([]);
 
   const changeText = (e) => setText(e.target.value);
@@ -17,33 +16,21 @@ export const useTodoFuction = () => {
   const addTodo = () => {
     if (text === "") return;
 
-    let addTodo = { ...newTodo, id, text };
+    let addTodo = { ...taskObj, id, text };
     setTodos([...todos, addTodo]);
     setText("");
     setId((prevCount) => prevCount + 1);
   };
 
-  const changeProp = (id, name) => {
-    setTodos((prevTodos) =>
-      prevTodos.map((prevTodo) => {
-        if (prevTodo.id === id) {
-          return {
-            ...prevTodo,
-            [name]: !prevTodo[name],
-          };
-        }
-        return prevTodo;
-      })
-    );
-  };
+  const changeTodos = (id, e) => {
+    const { name, value } = e.target;
 
-  const editText = (id, e) => {
     setTodos((prevTodos) =>
       prevTodos.map((prevTodo) => {
         if (prevTodo.id === id) {
           return {
             ...prevTodo,
-            text: e.target.value,
+            [name]: name === "text" ? value : !prevTodo[name],
           };
         }
         return prevTodo;
@@ -64,8 +51,7 @@ export const useTodoFuction = () => {
     todos,
     changeText,
     addTodo,
-    changeProp,
-    editText,
+    changeTodos,
     deleteTodo,
   };
 };

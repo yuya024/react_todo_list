@@ -1,5 +1,5 @@
 export const TodoList = (props) => {
-  const { todos, onChangeProp, onChangeEditText, onClickDelete } = props;
+  const { todos, onChangeTodos, onClickDelete } = props;
 
   return (
     <div>
@@ -9,7 +9,7 @@ export const TodoList = (props) => {
             <input
               type="checkbox"
               name="isCompleted"
-              onChange={(e) => onChangeProp(todo.id, e.target.name)}
+              onChange={(e) => onChangeTodos(todo.id, e)}
             />
             {!todo.isEdit ? (
               <label>{todo.text}</label>
@@ -18,14 +18,11 @@ export const TodoList = (props) => {
                 type="text"
                 name="text"
                 value={todo.text}
-                onChange={(e) => onChangeEditText(todo.id, e)}
+                onChange={(e) => onChangeTodos(todo.id, e)}
               />
             )}
             {!todo.isEdit && (
-              <button
-                name="isEdit"
-                onClick={(e) => onChangeProp(todo.id, e.target.name)}
-              >
+              <button name="isEdit" onClick={(e) => onChangeTodos(todo.id, e)}>
                 編集
               </button>
             )}
@@ -33,10 +30,7 @@ export const TodoList = (props) => {
               <button onClick={() => onClickDelete(todo.id)}>削除</button>
             )}
             {todo.isEdit && (
-              <button
-                name="isEdit"
-                onClick={(e) => onChangeProp(todo.id, e.target.name)}
-              >
+              <button name="isEdit" onClick={(e) => onChangeTodos(todo.id, e)}>
                 保存
               </button>
             )}
